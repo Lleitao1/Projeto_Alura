@@ -18,6 +18,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var tableViewController : RefeicoesTableViewController?
     
     @IBOutlet var nomeTextField: UITextField?
     @IBOutlet weak var felicidadeTextField: UITextField?
@@ -30,14 +31,21 @@ class ViewController: UIViewController {
         }
         
         
-        guard let felicidadeDaRefeicao = felicidadeTextField?.text else {
+        guard let felicidadeDaRefeicao = felicidadeTextField?.text, let felicidade = Int(felicidadeDaRefeicao) else {
             return
         }
         
-        let refeicao = Refeicao( nome: nomeDaRefeicao, felicidade: felicidadeDaRefeicao)
+        let refeicao = Refeicao( nome: nomeDaRefeicao, felicidade: felicidade)
+        
+        print(" voce adicionou \(refeicao.nome) com felicidade \(refeicao.felicidade)")
+        
+        tableViewController?.add(refeicao)
+        navigationController?.popViewController(animated: true)
+        
+        //```TableViewController?.add(refeicao)
         
         
-        print(" voce adicionou \(refeicao.nome) de \(refeicao.felicidade)")
+        
     }
 }
 
