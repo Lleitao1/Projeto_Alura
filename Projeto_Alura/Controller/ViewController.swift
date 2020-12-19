@@ -18,11 +18,14 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    //Variavel para associar views
     var tableViewController : RefeicoesTableViewController?
     
+    //Entradas dos campos nome e felicidade
     @IBOutlet var nomeTextField: UITextField?
     @IBOutlet weak var felicidadeTextField: UITextField?
     
+    //entrada do campo adicionar
     @IBAction func adicionar(_ sender: Any){
         
         
@@ -35,14 +38,12 @@ class ViewController: UIViewController {
             return
         }
         
-        let refeicao = Refeicao( nome: nomeDaRefeicao, felicidade: felicidade)
+        let refeicao = Refeicao( nome: nomeDaRefeicao, felicidade)
         
         print(" voce adicionou \(refeicao.nome) com felicidade \(refeicao.felicidade)")
         
         tableViewController?.add(refeicao)
         navigationController?.popViewController(animated: true)
-        
-        //```TableViewController?.add(refeicao)
         
         
         

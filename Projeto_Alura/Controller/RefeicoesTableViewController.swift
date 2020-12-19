@@ -11,14 +11,17 @@ import UIKit
 
 class RefeicoesTableViewController : UITableViewController {
     
-    var refeicoes = [Refeicao(nome: "Bolo",felicidade: 4),
-                     Refeicao(nome: "Pizza",felicidade: 5),
-                     Refeicao(nome: "Comida Japonesa", felicidade: 3)]
+    //Lista inicial
+    var refeicoes = [Refeicao(nome: "Bolo", 4),
+                     Refeicao(nome: "Pizza", 5),
+                     Refeicao(nome: "Comida Japonesa", 3)]
     
+    //Numero de linhas
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return refeicoes.count
     }
     
+    //Uma celula por linha mostra um nome
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let celula = UITableViewCell(style: .default, reuseIdentifier: nil)
@@ -30,11 +33,14 @@ class RefeicoesTableViewController : UITableViewController {
         
     }
     
+    //Adicionar refeicao à lista
     func add(_ refeicao: Refeicao){
         refeicoes.append(refeicao)
+        //recarregar tela para mostrar o alimento adicionado
         tableView.reloadData()
         }
     
+    //Segue partindo do formulario aponta para a view da lista 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let viewController = segue.destination as? ViewController{
             viewController.tableViewController = self

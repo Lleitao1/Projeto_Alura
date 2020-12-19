@@ -9,9 +9,12 @@
 import UIKit
 
 class Item: NSObject {
+    
+    //atributos
     var nome: String
     var calorias: Double
     
+    //construtor
     init(nome: String, calorias: Double) {
         self.nome = nome
         self.calorias = calorias
