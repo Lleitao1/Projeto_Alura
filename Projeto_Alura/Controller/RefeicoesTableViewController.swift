@@ -27,6 +27,9 @@ class delegate : UITableViewController, AdicionaRefeicaoDelegate{
         let celula = UITableViewCell(style: .default, reuseIdentifier: nil)
         let refeicao = refeicoes[indexPath.row]
         
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(mostrarDetalhes(_:)))
+        celula.addGestureRecognizer(longPress)
+        
         celula.textLabel?.text = refeicao.nome
         
         return celula
@@ -40,6 +43,23 @@ class delegate : UITableViewController, AdicionaRefeicaoDelegate{
         tableView.reloadData()
         }
     
+    @objc func mostrarDetalhes(_ gesture: UILongPressGestureRecognizer){
+        if gesture.state == .began{
+            let celula = gesture.view as! UITableViewCell
+            
+            guard let indexPath = tableView.indexPath(for: celula) else{return}
+            
+            let refeicao = refeicoes[indexPath.row]
+            
+            let alerta = UIAlertController(title: refeicao.nome, message: "felicidade: \(refeicao.felicidade)", preferredStyle: .alert)
+            
+            let cancelarBotao = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
+            
+            alerta.addAction(cancelarBotao)
+            present(alerta, animated: true, completion: nil)
+        }
+    }
+
     // MARK: - segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let viewController = segue.destination as? ViewController{
