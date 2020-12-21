@@ -9,6 +9,7 @@
 import UIKit
 
 class Refeicao: NSObject {
+    
     //atributos
     var nome: String
     var felicidade: Int

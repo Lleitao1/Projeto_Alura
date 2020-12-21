@@ -11,7 +11,7 @@ import UIKit
 
 class delegate : UITableViewController, AdicionaRefeicaoDelegate{
     
-    //Lista inicial
+    //MARK: - List
     var refeicoes = [Refeicao(nome: "Bolo", 4),
                      Refeicao(nome: "Pizza", 5),
                      Refeicao(nome: "Comida Japonesa", 3)]
@@ -40,7 +40,7 @@ class delegate : UITableViewController, AdicionaRefeicaoDelegate{
         tableView.reloadData()
         }
     
-    //Segue partindo do formulario aponta para a view da lista 
+    // MARK: - segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let viewController = segue.destination as? ViewController{
             viewController.delegate = self

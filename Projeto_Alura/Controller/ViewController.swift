@@ -6,30 +6,39 @@
 //  Copyright © 2020 Lucas Abdel Leitao. All rights reserved.
 //
 
-//
-//  ViewController.swift
-//  teste
-//
-//  Created by Lucas Abdel Leitao on 16/12/20.
-//  Copyright © 2020 Lucas Abdel Leitao. All rights reserved.
-//
-
 import UIKit
 
 protocol AdicionaRefeicaoDelegate{
     func add(_ refeicao: Refeicao)
 }
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource {
     
-    //Variavel para associar views
+    //MARK: - Atributos
     var delegate: AdicionaRefeicaoDelegate?
+    var itens: [String] = ["molho de tomate", "queijo","orégano"]
     
-    //Entradas dos campos nome e felicidade
+    // MARK: - IBOutlets
     @IBOutlet var nomeTextField: UITextField?
     @IBOutlet weak var felicidadeTextField: UITextField?
     
-    //entrada do campo adicionar
+    // MARK: - UITableViewDataSource
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return itens.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let celula = UITableViewCell(style: .default, reuseIdentifier: nil)
+        
+        let LinhaTabela = indexPath.row
+        let item = itens[LinhaTabela]
+        
+        celula.textLabel?.text = item
+        
+        return celula
+    }
+    
+    //MARK: - IBActions
     @IBAction func adicionar(_ sender: Any){
         
         
