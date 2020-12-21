@@ -11,14 +11,15 @@ import UIKit
 class Refeicao: NSObject {
     
     //atributos
-    var nome: String
-    var felicidade: Int
+    let nome: String
+    let felicidade: Int
     var itens: Array<Item> = []
     
     //construtor
-    init(nome: String,_ felicidade: Int) {
+    init(nome: String,_ felicidade: Int,_ itens: [Item] = []) {
         self.nome = nome
         self.felicidade = felicidade
+        self.itens = itens
     }
     
     //Metodo para calcular total de calorias dos itens adicionados

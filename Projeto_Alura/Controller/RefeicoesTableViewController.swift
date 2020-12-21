@@ -12,8 +12,8 @@ import UIKit
 class delegate : UITableViewController, AdicionaRefeicaoDelegate{
     
     //MARK: - List
-    var refeicoes = [Refeicao(nome: "Bolo", 4),
-                     Refeicao(nome: "Pizza", 5),
+    var refeicoes = [Refeicao(nome: "Bolo", 4 ),
+                     Refeicao(nome: "Pizza", 5 ),
                      Refeicao(nome: "Comida Japonesa", 3)]
     
     //Numero de linhas

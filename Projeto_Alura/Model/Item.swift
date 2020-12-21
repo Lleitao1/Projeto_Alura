@@ -15,7 +15,7 @@ class Item: NSObject {
     var calorias: Double
     
     //construtor
-    init(nome: String, calorias: Double) {
+    init(_ nome: String,_ calorias: Double) {
         self.nome = nome
         self.calorias = calorias
     }

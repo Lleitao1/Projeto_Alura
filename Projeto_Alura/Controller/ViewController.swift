@@ -12,17 +12,34 @@ protocol AdicionaRefeicaoDelegate{
     func add(_ refeicao: Refeicao)
 }
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     //MARK: - Atributos
     var delegate: AdicionaRefeicaoDelegate?
-    var itens: [String] = ["molho de tomate", "queijo","orégano"]
+    var itens: [Item] = [Item("molho de tomate", 40.0),
+                         Item("queijo", 80.0),
+                         Item("orégano", 50.0)]
+    
+    var itensSelecionados: [Item] = []
     
     // MARK: - IBOutlets
+    
     @IBOutlet var nomeTextField: UITextField?
     @IBOutlet weak var felicidadeTextField: UITextField?
     
+    // MARK - View Life cycle
+    override func viewDidLoad() {
+        
+        let botaoAdicionaItem = UIBarButtonItem(title: "Adicionar", style: .plain, target: self, action: #selector(Adicionaritem))
+        navigationItem.backBarButtonItem = botaoAdicionaItem
+    }
+    
+    @objc func Adicionaritem (){
+        print ("adicionar novo item na lista")
+    }
+    
     // MARK: - UITableViewDataSource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itens.count
     }
@@ -33,13 +50,35 @@ class ViewController: UIViewController, UITableViewDataSource {
         let LinhaTabela = indexPath.row
         let item = itens[LinhaTabela]
         
-        celula.textLabel?.text = item
+        celula.textLabel?.text = item.nome
         
         return celula
     }
     
+    // MARK: - UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let celula = tableView.cellForRow(at: indexPath) else {return}
+        
+        if celula.accessoryType == .none{
+            celula.accessoryType = .checkmark
+            
+            let LinhaTabela = indexPath.row
+            
+            itensSelecionados.append(itens[LinhaTabela])
+        } else {
+            celula.accessoryType = .none
+            let item = itens[indexPath.row]
+            if let position = itensSelecionados.index(of : item){
+            itensSelecionados.remove(at: position)
+        }
+        
+    }
+    
     //MARK: - IBActions
-    @IBAction func adicionar(_ sender: Any){
+        
+        func adicionar(_ sender: Any){
         
         
         guard let nomeDaRefeicao = nomeTextField?.text else {
@@ -51,7 +90,9 @@ class ViewController: UIViewController, UITableViewDataSource {
             return
         }
         
-        let refeicao = Refeicao( nome: nomeDaRefeicao, felicidade)
+        let refeicao = Refeicao( nome: nomeDaRefeicao, felicidade, [])
+        
+        refeicao.itens = itensSelecionados
         
         print(" voce adicionou \(refeicao.nome) com felicidade \(refeicao.felicidade)")
         
@@ -64,3 +105,4 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
 }
 
+}
