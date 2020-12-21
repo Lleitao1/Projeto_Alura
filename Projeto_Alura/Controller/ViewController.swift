@@ -1,31 +1,30 @@
 //
 //  ViewController.swift
-//  Projeto_Alura
+//  eggplant-brownie
 //
-//  Created by Lucas Abdel Leitao on 18/12/20.
-//  Copyright © 2020 Lucas Abdel Leitao. All rights reserved.
+//  Created by Alura on 23/02/19.
+//  Copyright © 2019 Alura. All rights reserved.
 //
 
 import UIKit
 
-protocol AdicionaRefeicaoDelegate{
+protocol AdicionaRefeicaoDelegate {
     func add(_ refeicao: Refeicao)
 }
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AdicionarItensDelegate {
     
-    //MARK: - IBOutlet
+    // MARK: - IBOutlet
     
-    @IBOutlet weak var ItensTableView: UITableView!
+    @IBOutlet weak var itensTableView: UITableView!
     
+    // MARK: - Atributos
     
-    
-    //MARK: - Atributos
     var delegate: AdicionaRefeicaoDelegate?
-    var itens: [Item] = [Item("molho de tomate", 40.0),
-                         Item("queijo", 80.0),
-                         Item("orégano", 50.0)]
-    
+    var itens: [Item] = [Item( "Molho de tomate",40.0),
+                         Item( "Queijo", 40.0),
+                         Item( "Molho apimentado",  40.0),
+                         Item("Manjericao", 40.0)]
     var itensSelecionados: [Item] = []
     
     // MARK: - IBOutlets
@@ -33,22 +32,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var nomeTextField: UITextField?
     @IBOutlet weak var felicidadeTextField: UITextField?
     
-    // MARK - View Life cycle
+    // MARK: - View life cycle
+    
     override func viewDidLoad() {
-        
-        let botaoAdicionaItem = UIBarButtonItem(title: "Adicionar", style: .plain, target: self, action: #selector(Adicionaritem))
-        navigationItem.backBarButtonItem = botaoAdicionaItem
+        let botaoAdicionaItem = UIBarButtonItem(title: "adicionar", style: .plain, target: self, action: #selector(adicionarItens))
+        navigationItem.rightBarButtonItem = botaoAdicionaItem
     }
     
-    @objc func Adicionaritem (){
+    @objc func adicionarItens() {
         let adicionarItensViewController = AdicionarItensViewController(delegate: self)
         navigationController?.pushViewController(adicionarItensViewController, animated: true)
     }
     
     func add(_ item: Item) {
         itens.append(item)
-        ItensTableView.reloadData()
-        
+        itensTableView.reloadData()
     }
     
     // MARK: - UITableViewDataSource
@@ -60,8 +58,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celula = UITableViewCell(style: .default, reuseIdentifier: nil)
         
-        let LinhaTabela = indexPath.row
-        let item = itens[LinhaTabela]
+        let linhaDaTabela = indexPath.row
+        let item = itens[linhaDaTabela]
         
         celula.textLabel?.text = item.nome
         
@@ -71,51 +69,49 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        guard let celula = tableView.cellForRow(at: indexPath) else {return}
-        
-        if celula.accessoryType == .none{
+        guard let celula = tableView.cellForRow(at: indexPath) else { return }
+        if celula.accessoryType == .none {
             celula.accessoryType = .checkmark
-            
-            let LinhaTabela = indexPath.row
-            
-            itensSelecionados.append(itens[LinhaTabela])
+            let linhaDaTabela = indexPath.row
+            itensSelecionados.append(itens[linhaDaTabela])
         } else {
             celula.accessoryType = .none
+            
             let item = itens[indexPath.row]
-            if let position = itensSelecionados.index(of : item){
-            itensSelecionados.remove(at: position)
+            if let position = itensSelecionados.index(of: item) {
+                itensSelecionados.remove(at: position)
+            }
         }
-        
     }
     
-    //MARK: - IBActions
-        
-        func adicionar(_ sender: Any){
-        
+    // MARK: - IBActions
+    
+    @IBAction func adicionar(_ sender: Any) {
         
         guard let nomeDaRefeicao = nomeTextField?.text else {
             return
         }
         
-        
         guard let felicidadeDaRefeicao = felicidadeTextField?.text, let felicidade = Int(felicidadeDaRefeicao) else {
             return
         }
         
-        let refeicao = Refeicao( nome: nomeDaRefeicao, felicidade, [])
+        let refeicao = Refeicao(nome: nomeDaRefeicao, felicidade, itensSelecionados)
         
-        refeicao.itens = itensSelecionados
-        
-        print(" voce adicionou \(refeicao.nome) com felicidade \(refeicao.felicidade)")
+        print("comi \(refeicao.nome) e fiquei com felicidade: \(refeicao.felicidade)")
         
         delegate?.add(refeicao)
-
         navigationController?.popViewController(animated: true)
-        
-        
-        
     }
 }
 
-}
+
+
+
+
+
+
+
+
+
+
