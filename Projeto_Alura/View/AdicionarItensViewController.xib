@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AdicionarItensViewController" customModule="Projeto_Alura" customModuleProvider="target">
             <connections>
+                <outlet property="CaloriasTextField" destination="ipi-ZF-oGS" id="uum-Kf-gh5"/>
+                <outlet property="NomeTextField" destination="i02-nu-Z6M" id="rCB-NG-drL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -52,6 +54,14 @@
                     <rect key="frame" x="141" y="269" width="65" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Adicionar"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UGd-Vx-Hgx">
+                    <rect key="frame" x="141" y="269" width="65" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Adicionar"/>
+                    <connections>
+                        <action selector="AdicionarItem:" destination="-1" eventType="touchUpInside" id="4wD-la-Ffg"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

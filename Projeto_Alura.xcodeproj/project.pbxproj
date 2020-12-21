@@ -157,9 +157,9 @@
 		3A8B360F258D4D7400EC9F43 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				3A8B36162590C98500EC9F43 /* AdicionarItensViewController.swift */,
 				3A8B35E1258D4D5E00EC9F43 /* ViewController.swift */,
 				3A8B3614258E1C9500EC9F43 /* RefeicoesTableViewController.swift */,
+				3A8B36162590C98500EC9F43 /* AdicionarItensViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

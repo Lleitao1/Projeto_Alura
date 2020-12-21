@@ -12,7 +12,13 @@ protocol AdicionaRefeicaoDelegate{
     func add(_ refeicao: Refeicao)
 }
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AdicionarItensDelegate {
+    
+    //MARK: - IBOutlet
+    
+    @IBOutlet weak var ItensTableView: UITableView!
+    
+    
     
     //MARK: - Atributos
     var delegate: AdicionaRefeicaoDelegate?
@@ -35,7 +41,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc func Adicionaritem (){
-        print ("adicionar novo item na lista")
+        let adicionarItensViewController = AdicionarItensViewController(delegate: self)
+        navigationController?.pushViewController(adicionarItensViewController, animated: true)
+    }
+    
+    func add(_ item: Item) {
+        itens.append(item)
+        ItensTableView.reload()
+        
     }
     
     // MARK: - UITableViewDataSource

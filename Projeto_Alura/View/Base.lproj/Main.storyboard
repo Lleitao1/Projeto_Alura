@@ -117,6 +117,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="ItensTableView" destination="Urn-yP-7gH" id="D6F-7K-SJk"/>
                         <outlet property="felicidadeTextField" destination="3Yd-80-vcf" id="zOC-bu-CSj"/>
                         <outlet property="nomeTextField" destination="4tI-aa-aUB" id="Whf-lu-n4A"/>
                     </connections>
