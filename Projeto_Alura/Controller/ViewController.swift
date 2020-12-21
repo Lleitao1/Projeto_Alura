@@ -16,10 +16,14 @@
 
 import UIKit
 
+protocol AdicionaRefeicaoDelegate{
+    func add(_ refeicao: Refeicao)
+}
+
 class ViewController: UIViewController {
     
     //Variavel para associar views
-    var tableViewController : RefeicoesTableViewController?
+    var delegate: AdicionaRefeicaoDelegate?
     
     //Entradas dos campos nome e felicidade
     @IBOutlet var nomeTextField: UITextField?
@@ -42,7 +46,8 @@ class ViewController: UIViewController {
         
         print(" voce adicionou \(refeicao.nome) com felicidade \(refeicao.felicidade)")
         
-        tableViewController?.add(refeicao)
+        delegate?.add(refeicao)
+
         navigationController?.popViewController(animated: true)
         
         

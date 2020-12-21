@@ -9,7 +9,7 @@
 import UIKit
 
 
-class RefeicoesTableViewController : UITableViewController {
+class delegate : UITableViewController, AdicionaRefeicaoDelegate{
     
     //Lista inicial
     var refeicoes = [Refeicao(nome: "Bolo", 4),
@@ -43,7 +43,7 @@ class RefeicoesTableViewController : UITableViewController {
     //Segue partindo do formulario aponta para a view da lista 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let viewController = segue.destination as? ViewController{
-            viewController.tableViewController = self
+            viewController.delegate = self
         }
     }
 }
