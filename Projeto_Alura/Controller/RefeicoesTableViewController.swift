@@ -4,7 +4,7 @@
 //
 //  Created by Lucas Abdel Leitao on 19/12/20.
 //  Copyright © 2020 Lucas Abdel Leitao. All rights reserved.
-//
+//ZZ
 
 import UIKit
 
@@ -12,11 +12,11 @@ import UIKit
 class RefeicoesTableViewController : UITableViewController, AdicionaRefeicaoDelegate{
     
     //MARK: - List
-    var refeicoes = [Refeicao(nome: "Bolo", 4 ),
-                     Refeicao(nome: "Pizza", 5 ),
-                     Refeicao(nome: "Comida Japonesa", 3)]
-    
-    var refeicaoSelecionada: Refeicao?
+    var refeicoes: [Refeicao] = []
+
+    override func viewDidLoad() {
+        refeicoes = RefeicaoDao().recupera()
+    }
     
     //Numero de linhas
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,8 +41,9 @@ class RefeicoesTableViewController : UITableViewController, AdicionaRefeicaoDele
     //Adicionar refeicao à lista
     func add(_ refeicao: Refeicao){
         refeicoes.append(refeicao)
-        //recarregar tela para mostrar o alimento adicionado
         tableView.reloadData()
+        RefeicaoDao().save(refeicoes)
+        
         }
     
     @objc func mostrarDetalhes(_ gesture: UILongPressGestureRecognizer){
@@ -50,24 +51,14 @@ class RefeicoesTableViewController : UITableViewController, AdicionaRefeicaoDele
             let celula = gesture.view as! UITableViewCell
             
             guard let indexPath = tableView.indexPath(for: celula) else{return}
-            
             let refeicao = refeicoes[indexPath.row]
             
+            RemoveRefeicoesViewController(controller: self).exibe(refeicao, handler:
+                {Alert in
+                    self.refeicoes.remove(at: indexPath.row)
+                    self.tableView.reloadData()
+            })
             
-            let alerta = UIAlertController(title: refeicao.nome, message: "felicidade: \(refeicao.felicidade)", preferredStyle: .alert)
-            
-            let cancelarBotao = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
-            
-            alerta.addAction(cancelarBotao)
-            
-            let botaoRemover = UIAlertAction(title: "remover", style: .destructive,
-                handler: {alerta in
-                self.refeicoes.remove(at: indexPath.row)
-                self.tableView.reloadData()
-                })
-            
-            alerta.addAction(botaoRemover)
-            present(alerta, animated: true, completion: nil)
         }
     }
     

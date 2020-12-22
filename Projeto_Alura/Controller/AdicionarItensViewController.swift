@@ -21,9 +21,6 @@ class AdicionarItensViewController: UIViewController {
     //MARK: - Atributos
     var delegate: AdicionarItensDelegate?
     
-    
-    
-    
     init(delegate: AdicionarItensDelegate) {
         super.init(nibName: "AdicionarItensViewController", bundle: nil)
         self.delegate = delegate
@@ -44,11 +41,12 @@ class AdicionarItensViewController: UIViewController {
     @IBAction func AdicionarItem(_ sender: Any) {
         guard let nome = NomeTextField?.text, let calorias = CaloriasTextField?.text else{return}
         
-        guard let numeroDeCalorias = Double(calorias) else{return}
-        
-        let item = Item(nome , numeroDeCalorias)
-        delegate?.add(item)
-        navigationController?.popViewController(animated: true)
-    }
+        if let numeroDeCalorias = Double(calorias) {
+            let item = Item(nome, numeroDeCalorias)
+            
+            delegate?.add(item)
+            navigationController?.popViewController(animated: true)
+        }
     
+    }
 }

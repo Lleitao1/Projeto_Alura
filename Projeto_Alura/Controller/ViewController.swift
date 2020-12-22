@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  eggplant-brownie
+//  Projeto_Alura
 //
 //  Created by Alura on 23/02/19.
 //  Copyright © 2019 Alura. All rights reserved.
@@ -21,10 +21,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: - Atributos
     
     var delegate: AdicionaRefeicaoDelegate?
-    var itens: [Item] = [Item( "Molho de tomate",40.0),
-                         Item( "Queijo", 40.0),
-                         Item( "Oregano",  40.0),
-                         Item("Manjericao", 40.0)]
+    var itens: [Item] = []
     var itensSelecionados: [Item] = []
     
     // MARK: - IBOutlets
@@ -37,6 +34,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         let botaoAdicionaItem = UIBarButtonItem(title: "adicionar", style: .plain, target: self, action: #selector(adicionarItens))
         navigationItem.rightBarButtonItem = botaoAdicionaItem
+
+        
     }
     
     @objc func adicionarItens() {
@@ -46,14 +45,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func add(_ item: Item) {
         itens.append(item)
-        itensTableView?.reloadData()
-        
+        ItemDao().save(itens)
         if let tableView = itensTableView{
-            tableView.reloadData()} else{Alerta(controller: self).exibe(titulo: "Desculpe", mensagem: "Nao foi possivel adicionar alimento")}
-        
-        }
-    
-    
+            tableView.reloadData()}
+        else{
+            Alerta(controller: self).exibe(titulo: "Desculpe", mensagem: "Nao foi possivel adicionar alimento")}
+    }
+  
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

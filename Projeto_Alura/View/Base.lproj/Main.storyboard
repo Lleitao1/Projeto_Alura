@@ -58,7 +58,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Adicionar"/>
                                 <connections>
-                                    <action selector="adicionar:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vf7-vo-WnI"/>
+                                    <action selector="adicionar:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vn8-sb-aXS"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="nome:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQA-Mw-teK">
