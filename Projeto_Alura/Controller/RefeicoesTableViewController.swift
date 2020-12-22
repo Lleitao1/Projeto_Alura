@@ -16,6 +16,8 @@ class RefeicoesTableViewController : UITableViewController, AdicionaRefeicaoDele
                      Refeicao(nome: "Pizza", 5 ),
                      Refeicao(nome: "Comida Japonesa", 3)]
     
+    var refeicaoSelecionada: Refeicao?
+    
     //Numero de linhas
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return refeicoes.count
@@ -51,15 +53,24 @@ class RefeicoesTableViewController : UITableViewController, AdicionaRefeicaoDele
             
             let refeicao = refeicoes[indexPath.row]
             
+            
             let alerta = UIAlertController(title: refeicao.nome, message: "felicidade: \(refeicao.felicidade)", preferredStyle: .alert)
             
             let cancelarBotao = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
             
             alerta.addAction(cancelarBotao)
+            
+            let botaoRemover = UIAlertAction(title: "remover", style: .destructive,
+                handler: {alerta in
+                self.refeicoes.remove(at: indexPath.row)
+                self.tableView.reloadData()
+                })
+            
+            alerta.addAction(botaoRemover)
             present(alerta, animated: true, completion: nil)
         }
     }
-
+    
     // MARK: - segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "adicionar" {
