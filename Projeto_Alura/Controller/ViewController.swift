@@ -16,14 +16,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: - IBOutlet
     
-    @IBOutlet weak var itensTableView: UITableView!
+    @IBOutlet weak var itensTableView: UITableView?
     
     // MARK: - Atributos
     
     var delegate: AdicionaRefeicaoDelegate?
     var itens: [Item] = [Item( "Molho de tomate",40.0),
                          Item( "Queijo", 40.0),
-                         Item( "Molho apimentado",  40.0),
+                         Item( "Oregano",  40.0),
                          Item("Manjericao", 40.0)]
     var itensSelecionados: [Item] = []
     
@@ -46,8 +46,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func add(_ item: Item) {
         itens.append(item)
-        itensTableView.reloadData()
-    }
+        itensTableView?.reloadData()
+        
+        if let tableView = itensTableView{
+            tableView.reloadData()} else{Alerta(controller: self).exibe(titulo: "Desculpe", mensagem: "Nao foi possivel adicionar alimento")}
+        
+        }
+    
     
     // MARK: - UITableViewDataSource
     
@@ -84,28 +89,33 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    func recuperaRefeicaoFormulario() -> Refeicao? {
+        guard let nomeDaRefeicao = nomeTextField?.text else {
+            return nil
+        }
+        
+        guard let felicidadeDaRefeicao = felicidadeTextField?.text, let felicidade = Int(felicidadeDaRefeicao) else {
+            return nil
+        }
+        
+        let refeicao = Refeicao(nome: nomeDaRefeicao, felicidade, itensSelecionados)
+        return refeicao
+    }
+    
     // MARK: - IBActions
     
     @IBAction func adicionar(_ sender: Any) {
         
-        guard let nomeDaRefeicao = nomeTextField?.text else {
-            return
-        }
         
-        guard let felicidadeDaRefeicao = felicidadeTextField?.text, let felicidade = Int(felicidadeDaRefeicao) else {
-            return
-        }
+        if let refeicao = recuperaRefeicaoFormulario() {
+            delegate?.add(refeicao)
+            navigationController?.popViewController(animated: true)}
+        else {
+            Alerta(controller: self).exibe(titulo: "Atencao", mensagem: "Erro ao atualizar a tabela")}
         
-        let refeicao = Refeicao(nome: nomeDaRefeicao, felicidade, itensSelecionados)
-        
-        print("comi \(refeicao.nome) e fiquei com felicidade: \(refeicao.felicidade)")
-        
-        delegate?.add(refeicao)
-        navigationController?.popViewController(animated: true)
-    }
 }
 
-
+}
 
 
 

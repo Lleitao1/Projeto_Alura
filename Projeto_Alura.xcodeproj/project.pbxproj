@@ -19,6 +19,7 @@
 		3A8B3615258E1C9500EC9F43 /* RefeicoesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8B3614258E1C9500EC9F43 /* RefeicoesTableViewController.swift */; };
 		3A8B36182590C98500EC9F43 /* AdicionarItensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8B36162590C98500EC9F43 /* AdicionarItensViewController.swift */; };
 		3A8B36192590C98500EC9F43 /* AdicionarItensViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A8B36172590C98500EC9F43 /* AdicionarItensViewController.xib */; };
+		3AF454DC2591FA460061F26C /* Alerta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF454DB2591FA460061F26C /* Alerta.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		3A8B3614258E1C9500EC9F43 /* RefeicoesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefeicoesTableViewController.swift; sourceTree = "<group>"; };
 		3A8B36162590C98500EC9F43 /* AdicionarItensViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdicionarItensViewController.swift; sourceTree = "<group>"; };
 		3A8B36172590C98500EC9F43 /* AdicionarItensViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdicionarItensViewController.xib; sourceTree = "<group>"; };
+		3AF454DB2591FA460061F26C /* Alerta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerta.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				3A8B3610258D4D9900EC9F43 /* Refeicao.swift */,
+				3AF454DB2591FA460061F26C /* Alerta.swift */,
 				3A8B3612258D4DAA00EC9F43 /* Item.swift */,
 			);
 			path = Model;
@@ -302,6 +305,7 @@
 				3A8B3615258E1C9500EC9F43 /* RefeicoesTableViewController.swift in Sources */,
 				3A8B3611258D4D9900EC9F43 /* Refeicao.swift in Sources */,
 				3A8B35E0258D4D5E00EC9F43 /* AppDelegate.swift in Sources */,
+				3AF454DC2591FA460061F26C /* Alerta.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
